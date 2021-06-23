@@ -373,7 +373,7 @@ function ShareInfo() {
 
 function helpFriend() {
   return new Promise((resolve) => {
-    $.get(taskUrl("cash_mob_assist", `{"source":3,"inviteCode":"${cashinviteCode}","shareDate":"IRs1bey0ZP4"}`), (err, resp, data) => {
+    $.get(taskUrl("cash_mob_assist", `{"source":3,"inviteCode":"${cashinviteCode}","shareDate":"IRs1bey0ZP8"}`), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
