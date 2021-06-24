@@ -4,6 +4,11 @@
 活动入口：京东APP搜索领现金进入
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+
+自行添加变量设置邀请码 格式如下 默认10个
+export cashinviteCode="eU9YarjmN_l0-GaDzHIVgA"
+export cashinviteCode2="eU9YEIzvIL9XlTmXuAhW"
+export cashinviteCode3="eU9YEIzvIL9XlTmXuAhW"
 ============Quantumultx===============
 [task_local]
 #签到领现金
