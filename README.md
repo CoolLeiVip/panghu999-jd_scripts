@@ -1,5 +1,4 @@
-柠檬代维护
-微信公众号：柠檬玩机交流
+备份
 
 圈叉订阅
 https://raw.githubusercontent.com/panghu999/jd_scripts/master/QuantumultX/lxk0301_gallery.json
