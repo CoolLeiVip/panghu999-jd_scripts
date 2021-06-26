@@ -16,10 +16,10 @@ cron "10 0,3,8,11,17 * * *" script-path=https://raw.githubusercontent.com/passer
 let isNotify = true;//是否通知,仅限nodejs
 let ckPath = './jdCookie.js';//ck路径,环境变量:JDDJ_CKPATH
 
-const $ = new API("jd_jddj_fruit");
+const $ = new API("京东到家果园任务");
 try {
     //https://cdn.jsdelivr.net/gh/passerby-b/JDDJ@main/jddj_fruit_code.js
-    $.http.get({ url: 'https://ghproxy.com/https://raw.githubusercontent.com/panghu999/jd_scripts/main/jd_jddj_fruit_code.js' }).then(response => {
+    $.http.get({ url: 'https://ghproxy.com/https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_fruit_code.js' }).then(response => {
         if (!!response.body) eval(response.body);
     });
 } catch (error) {
