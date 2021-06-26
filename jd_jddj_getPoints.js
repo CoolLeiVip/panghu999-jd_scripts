@@ -14,7 +14,7 @@
 //[Script]
 //cron "*/5 * * * *" script-path=https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_getPoints.js,tag=京东到家鲜豆庄园收水滴
 
-
+const $ = new API("jd_jddj_getPoints");
 const $ = new Env("京东到家庄园领水滴");
 let ckPath = './jdCookie.js';//ck路径,环境变量:JDDJ_CKPATH
 let cookies = [];
