@@ -20,6 +20,10 @@ let lat = '30.' + Math.round(Math.random() * (99999 - 10000) + 10000);
 let lng = '114.' + Math.round(Math.random() * (99999 - 10000) + 10000);
 let cityid = Math.round(Math.random() * (1500 - 1000) + 1000);
 let cookies = [], notify = '';
+let scodes = [], jddjyqm = '';
+if (process.env.jddjyqm) {
+  jddjyqm = process.env.jddjyqm;
+}
 waterNum = 0, waterTimes = 0, shareCode = '', hzstr = '', msgStr = '';
 !(async() => {
     if (cookies.length == 0) {
@@ -75,8 +79,8 @@ waterNum = 0, waterTimes = 0, shareCode = '', hzstr = '', msgStr = '';
         await $.wait(1000);
         await runTask(tslist);
         await $.wait(1000);
-        
-        
+        //await zhuLi();
+        await $.wait(1000);
         await water();
         await $.wait(1000);
         hzstr = '';
@@ -86,6 +90,25 @@ waterNum = 0, waterTimes = 0, shareCode = '', hzstr = '', msgStr = '';
             if (element.taskId == '23eee1c043c01bc') {
                 shareCode += '@' + element.uniqueId + ',';
                 console.log('\n好友互助码:' + shareCode);
+             if(typeof jddjyqm == "undefined" || jddjyqm == null || jddjyqm == ""){
+             console.log(`请去变量设置邀请码格式如\nexport jddjyqm="JD_b38423d1e063000@2413a5236b088e6,"`)
+                 
+             }else {
+             jddjyqm = jddjyqm.replace(/ /g, '').replace(/\n/g, '');
+            if ( !! jddjyqm) {
+                jddjyqm = jddjyqm.substr(0, jddjyqm.length - 1);
+                scodes = jddjyqm.split(',')
+            }
+            for (let index = 0; index < scodes.length; index++) {
+                let option = urlTask('https://daojia.jd.com/client?lat=' + lat + '&lng=' + lng + '&lat_pos=' + lat + '&lng_pos=' + lng + '&city_id=' + cityid + '&deviceToken=' + deviceid + '&deviceId=' + deviceid + '&channel=wx_xcx&mpChannel=wx_xcx&platform=5.0.0&platCode=mini&appVersion=5.0.0&appName=paidaojia&deviceModel=appmodel&xcxVersion=9.2.0&isNeedDealError=true&business=djgyzhuli&functionId=task%2Ffinished&body=%7B%22modelId%22%3A%22M10007%22%2C%22taskType%22%3A1201%2C%22taskId%22%3A%2223eee1c043c01bc%22%2C%22plateCode%22%3A5%2C%22assistTargetPin%22%3A%22' + scodes[index].split('@')[0] + '%22%2C%22uniqueId%22%3A%22' + scodes[index].split('@')[1] + '%22%7D', '');
+                await $.http.get(option).then(response => {
+                    let data = JSON.parse(response.body);
+                    console.log('\n【A助力】:' + data.msg)
+                });
+              
+            }
+             }
+
                 hzstr = ',助力' + element.finishNum + '/' + element.totalNum + ',助力你的好友:';
                 if (element.fissionUserInfoList && element.fissionUserInfoList.length > 0) {
                     element.fissionUserInfoList.forEach(item => {
@@ -115,6 +138,22 @@ waterNum = 0, waterTimes = 0, shareCode = '', hzstr = '', msgStr = '';
 }).finally(() => {
     $.done();
 })
+
+async function zhuLi(shrae) {
+           jddjyqm = jddjyqm.replace(/ /g, '').replace(/\n/g, '');
+            if ( !! jddjyqm) {
+                jddjyqm = jddjyqm.substr(0, jddjyqm.length - 1);
+                scodes = jddjyqm.split(',')
+            }
+            for (let index = 0; index < scodes.length; index++) {
+                let option = urlTask('https://daojia.jd.com/client?lat=' + lat + '&lng=' + lng + '&lat_pos=' + lat + '&lng_pos=' + lng + '&city_id=' + cityid + '&deviceToken=' + deviceid + '&deviceId=' + deviceid + '&channel=wx_xcx&mpChannel=wx_xcx&platform=5.0.0&platCode=mini&appVersion=5.0.0&appName=paidaojia&deviceModel=appmodel&xcxVersion=9.2.0&isNeedDealError=true&business=djgyzhuli&functionId=task%2Ffinished&body=%7B%22modelId%22%3A%22M10007%22%2C%22taskType%22%3A1201%2C%22taskId%22%3A%2223eee1c043c01bc%22%2C%22plateCode%22%3A5%2C%22assistTargetPin%22%3A%22' + scodes[index].split('@')[0] + '%22%2C%22uniqueId%22%3A%22' + scodes[index].split('@')[1] + '%22%7D', '');
+                await $.http.get(option).then(response => {
+                    let data = JSON.parse(response.body);
+                    console.log('\n【助力】:' + data.msg)
+                });
+              
+            }
+}
 async function userinfo() {
     return new Promise(async resolve => {
         try {
@@ -153,6 +192,7 @@ async function taskList() {
         }
     })
 }
+
 async function water() {
     return new Promise(async resolve => {
         try {
